@@ -1,4 +1,4 @@
-*{
+body{
 	font-family: "Century Gothic";
 	font-size:14px;
 }
@@ -93,6 +93,112 @@
 	color:#fff;
 	font-weight:bold;
 }
+.login{
+}
+.form-login{
+	width:500px;
+	margin:auto;
+	margin-top:70px;
+}
+.login-form {
+    width: 500px;
+    margin: 0 auto;
+    position: relative;
+    background: #f3f3f3;  
+    background-image: url(../img/login.png);
+    background-repeat: no-repeat;
+    background-position: right center;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+.login-form .header {
+    padding: 40px 30px 30px 30px;
+}
+.login-form .header h1 {
+    font-family: "Century Gothic", serif;
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 34px;
+    color: #414848;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
+    margin-bottom: 10px;
+}
+.login-form .header span {
+    font-size: 11px;
+    line-height: 16px;
+    color: #678889;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
+    font-family: "Century Gothic", serif;
+}
+.login-form .content {
+    padding: 0 30px 25px 30px;
+}
+.login-form .content .input {
+    width: 270px;
+    padding: 15px 25px;
+    font-family: "HelveticaNeue-Light", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #9d9e9e;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 1);
+    background: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.50);
+    -moz-box-shadow: inset 0 1px 3px rgba(0,0,0,0.50);
+    -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.50);
+}
+.login-form .content .input:hover {
+    background: #dfe9ec;
+    color: #414848;
+}
+
+.login-form .content .input:focus {
+    background: #dfe9ec;
+    color: #414848;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.25);
+    -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.25);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.25);
+}
+.login-form .content .password, .login-form .content .pass-icon {
+    margin-top: 25px;
+}
+.login-form .footer {
+    padding: 25px 30px 40px 30px;
+    overflow: auto;
+    font-family: "Century Gothic", serif;
+    background: #d4dedf;
+    border-top: 1px solid #fff;
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.15);
+    -moz-box-shadow: inset 0 1px 0 rgba(0,0,0,0.15);
+    -webkit-box-shadow: inset 0 1px 0 rgba(0,0,0,0.15);
+}
+.login-form .footer .button:hover {
+    background: #3f9db8;
+    border: 1px solid rgba(256,256,256,0.75);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    -moz-box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    -webkit-box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+}
+.login-form .footer .button {
+    float: left;
+    padding: 11px 25px;
+    font-family: "Century Gothic", serif;
+    font-weight: 300;
+    font-size: 18px;
+    color: #fff;
+    text-shadow: 0px 1px 0 rgba(0,0,0,0.25);
+    background: #56c2e1;
+    border: 1px solid #46b3d3;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.75);
+    -moz-box-shadow: inset 0 0 2px rgba(256,256,256,0.75);
+    -webkit-box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.75);
+}
 @media (max-width: 768px){
 	.menu nav{
 			padding:0px 5px;
@@ -111,5 +217,28 @@
 	}
 	.dropdown-menu>li>a {
 		border:0px solid #7A4A88;
+	}
+	.form-login{
+		width:100%;
+		margin:auto;
+		margin-top:70px;
+	}
+	.login-form {
+	    width: 100%;
+	    padding:10px;
+	    margin: 0 auto;
+	    position: relative;
+	    background: #f3f3f3;  
+	    background-image: default;
+	    background-repeat: no-repeat;
+	    background-position: right center;
+	    border: 1px solid #fff;
+	    border-radius: 5px;
+	    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+	}
+	.login-form .content .input {
+ 	   width: 100%;
 	}
 }

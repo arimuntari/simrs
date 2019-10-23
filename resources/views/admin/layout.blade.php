@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Sistem Informasi Manajemen Rumah Sakit</title>
+  <title>@yield('title') Sistem Informasi Manajemen Rumah Sakit</title>
 
   <!-- Template CSS -->
   <link rel="stylesheet" type="text/css" href="{{ asset('assets/bootstrap/dist/css/bootstrap.css') }}">
@@ -63,6 +63,7 @@
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 				  <li><a href="#">User</a></li>
+				  <li><a href="{{ route('logout') }}">Logout</a></li>
 				</ul>
 			</li>
 		  </ul>
@@ -70,35 +71,10 @@
 	  </div>
 	</nav>
 </header>
-<div class="container">
-  <!-- Main content -->
-  <section class="content">
-	<h4><i class="fa fa-chart"></i> Home</h4>
-	<div class="row">
-		<div class="col-md-6">
-			<div class="panel panel-warning">
-			  <div class="panel-heading">Chart Laporan Pengeluaran</div>
-			  <div class="panel-body">Panel Content</div>
-			</div>
-		</div>
-		<div class="col-md-6">
-			<div class="panel panel-success">
-			  <div class="panel-heading">Chart Laporan Pemasukan</div>
-			  <div class="panel-body">Panel Content</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="panel panel-primary">
-			  <div class="panel-heading">Chart Laporan Stok</div>
-			  <div class="panel-body">Panel Content</div>
-			</div>
-		</div>
-	</div>
-  </section>
-  <!-- /.content -->
-</div>
+
+@yield('content')
+
+
   <script src="{{ asset('assets/jquery/dist/jquery.min.js') }}"></script>
   <script src="{{ asset('assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 </body>

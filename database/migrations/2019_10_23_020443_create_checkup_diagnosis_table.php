@@ -19,7 +19,6 @@ class CreateCheckupDiagnosisTable extends Migration
             $table->foreign('register_id')->references('id')->on('register');
             $table->unsignedBigInteger('diagnosis_id');
             $table->foreign('diagnosis_id')->references('id')->on('diagnosis');
-            $table->timestamps();
         });
     }
 

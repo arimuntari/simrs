@@ -12,5 +12,15 @@
 */
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
+});
+
+Route::post('/login', 'LoginController@login')->name('proses_login');
+
+
+Route::middleware(['checklogin'])->group(function () {
+	Route::get('/logout', 'LoginController@logout')->name('logout');
+	Route::get('/index', function () {
+	    	return view('admin/index', ['title' => "Dashboard"]);
+	});
 });
