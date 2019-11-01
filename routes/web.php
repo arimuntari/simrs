@@ -23,4 +23,12 @@ Route::middleware(['checklogin'])->group(function () {
 	Route::get('/index', function () {
 	    	return view('admin/index', ['title' => "Dashboard"]);
 	});
+
+    Route::resources([
+	    'users' => 'UsersController',
+	    'medicine' => 'MedicineController',
+	    'diagnosis' => 'DiagnosisController',
+	    'action' => 'ActionController',
+	    'pasien' => 'PasienController',
+	]);
 });

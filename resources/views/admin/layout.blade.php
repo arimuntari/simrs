@@ -44,9 +44,10 @@
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-database"></i> Data Master
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-				  <li><a href="#">Obat</a></li>
+				  <li><a href="{{ route('medicine.index') }}">Obat</a></li>
 				  <li><a href="#">Pasien</a></li>
-				  <li><a href="#">Supplier</a></li>
+				  <li><a href="{{ route('diagnosis.index') }}">Diagnosa</a></li>
+				  <li><a href="{{ route('action.index') }}">Tindakan</a></li>
 				</ul>
 			</li>
 			<li class="dropdown">

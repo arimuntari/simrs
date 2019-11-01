@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+       Blade::directive('dateindo', function ($expression) {
+            return "<?php echo ($expression)->format('m/d/Y'); ?>";
+        });
+        Blade::directive('rupiah', function ($uang) {
+            return "<?php echo 'Rp. ' . number_format($uang, 0, '.', '.'); ?>";
+        });
     }
 }
