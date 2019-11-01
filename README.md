@@ -1,4 +1,4 @@
-# Sistem Informasi Manajemen Rumah Sakit 
+# Sistem Informasi Manajemen Rumah Sakit php versi 7.3.9
 
 Cara Install
 1. clone repository
