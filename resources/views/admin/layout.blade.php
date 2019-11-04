@@ -45,7 +45,7 @@
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 				  <li><a href="{{ route('medicine.index') }}">Obat</a></li>
-				  <li><a href="#">Pasien</a></li>
+				  <li><a href="{{ route('patient.index') }}">Pasien</a></li>
 				  <li><a href="{{ route('diagnosis.index') }}">Diagnosa</a></li>
 				  <li><a href="{{ route('action.index') }}">Tindakan</a></li>
 				</ul>

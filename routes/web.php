@@ -29,6 +29,6 @@ Route::middleware(['checklogin'])->group(function () {
 	    'medicine' => 'MedicineController',
 	    'diagnosis' => 'DiagnosisController',
 	    'action' => 'ActionController',
-	    'pasien' => 'PasienController',
+	    'patient' => 'PatientController',
 	]);
 });

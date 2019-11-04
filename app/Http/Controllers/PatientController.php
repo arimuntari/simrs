@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Medicine;
-class PasienController extends Controller
+use App\Patient;
+class PatientController extends Controller
 {
-    private $title ="Data Obat";
+    private $title ="Data Pasien";
     private $icon ="<i class='fa fa-database'></i>";
     /**
      * Display a listing of the resource.
@@ -16,13 +16,13 @@ class PasienController extends Controller
     public function index(Request $request)
     {
         $key = $request->key;
-        $medicines = Medicine::when($request->key, function ($query) use ($request) {
+        $patients = Patient::when($request->key, function ($query) use ($request) {
             $query->where('name', 'like', "%{$request->key}%")->orWhere('code', 'like', "%{$request->key}%");
         })->paginate(10);;
 
 
-        return view('admin/medicine_view',
-                     ['medicines' => $medicines, 'key' => $key, 'icon'=>$this->icon ,'title' => $this->title]
+        return view('admin/patient_view',
+                     ['patients' => $patients, 'key' => $key, 'icon'=>$this->icon ,'title' => $this->title]
                    );
     }
 
@@ -33,7 +33,7 @@ class PasienController extends Controller
      */
     public function create()
     {
-        return view('admin/medicine_add', ['icon'=>$this->icon ,'title' => $this->title]);
+        return view('admin/patient_add', ['icon'=>$this->icon ,'title' => $this->title]);
     }
 
     /**
@@ -44,10 +44,10 @@ class PasienController extends Controller
      */
     public function store(Request $request)
     {
-        $medicine = Medicine::create($request->all());
-        if($medicine){
+        $patient = Patient::create($request->all());
+        if($patient){
             session()->flash('success', 'Tambah Data Berhasil!!');
-            return redirect('medicine');
+            return redirect('patient');
         }
         return redirect()->back();
     }
@@ -60,7 +60,7 @@ class PasienController extends Controller
      */
     public function show($id)
     {
-        return view('admin/medicine_add', ['icon'=>$this->icon ,'title' => $this->title]);
+        return view('admin/patient_add', ['icon'=>$this->icon ,'title' => $this->title]);
     }
 
     /**
@@ -71,8 +71,8 @@ class PasienController extends Controller
      */
     public function edit($id)
     {
-         $medicine = Medicine::find($id);
-         return view('admin/medicine_edit', ['medicine' => $medicine, 'icon'=>$this->icon , 'title' => $this->title]);
+         $patient = Patient::find($id);
+         return view('admin/patient_edit', ['patient' => $patient, 'icon'=>$this->icon , 'title' => $this->title]);
     }
 
     /**
@@ -84,13 +84,13 @@ class PasienController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $medicine = Medicine::find($id);
-         if($medicine->update($request->all())){
+        $patient = Patient::find($id);
+         if($patient->update($request->all())){
             session()->flash('success', 'Update Data Berhasil!!');
-            return redirect('medicine');
+            return redirect('patient');
         }
         session()->flash('fail', 'Update Data Gagal!!');
-        return redirect('medicine');
+        return redirect('patient');
     }
 
     /**
@@ -101,8 +101,8 @@ class PasienController extends Controller
      */
     public function destroy($id)
     {
-         $medicine = Medicine::find($id);
-         if($medicine->delete()){
+         $patient = Patient::find($id);
+         if($patient->delete()){
             session()->flash('success', 'Hapus Data Berhasil!!');
             return redirect()->back();
          }
