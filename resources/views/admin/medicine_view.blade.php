@@ -31,7 +31,7 @@
 	              </div>
 	              <div class="col-xs-9 col-md-8 col-lg-8">
 	                <div class="input-group input-group-md">
-	                  <input type="text" name="key" value="{{ $key }}" class="form-control" placeholder="Masukkan Nama Tindakan">
+	                  <input type="text" name="key" value="{{ $key }}" class="form-control" placeholder="Masukkan Nama Obat">
 	                  <span class="input-group-btn">
 	                      <button type="submit" class="btn btn-warning btn-flat"><i class="fa fa-search"></i> Tampil</button>
 	                  </span>
