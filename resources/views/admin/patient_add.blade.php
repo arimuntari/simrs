@@ -10,39 +10,35 @@
   <fieldset>
 	  <legend><h4> {!! $icon." Tambah ".$title !!}</h4></legend>
             @include('admin.validasi')
-    <form action="{{ route('medicine.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('patient.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
-          <label class="control-label">Kode Obat</label>
-            <input class="form-control" type="text" required name="code" placeholder="Kode Obat">
+          <label class="control-label">Kode Pasien</label>
+            <input class="form-control" type="text" readonly="" required name="code" placeholder="Kode Pasien" value="{{ Helper::codePatient() }}">
         </div>
         <div class="form-group">
-          <label class="control-label">Nama Obat</label>
-            <input class="form-control" type="text" required name="name" placeholder="Nama Obat">
+          <label class="control-label">Nama Pasien</label>
+            <input class="form-control" type="text" required name="name" placeholder="Nama Pasien">
         </div>
         <div class="form-group">
-          <label for="name" class="control-label">Stok Obat</label>
-            <input class="form-control" type="text" required name="stock" placeholder="Stok Obat">
+          <label for="name" class="control-label">Tgl. Lahir</label>
+            <input class="form-control" type="text" required name="birthdate" placeholder="Tgl. Pasien">
         </div>
       </div>
       <div class="col-md-6">
         <div class="form-group">
-          <label  class="control-label">Harga Beli</label>
-            <input class="form-control" type="text" required name="purchase_price" placeholder="Harga Beli">
+          <label  class="control-label">No. Telp</label>
+            <input class="form-control" type="text" required name="phone_number" placeholder="No. Telp">
         </div>
         <div class="form-group">
-          <label class="control-label">Harga Jual</label>
-            <input class="form-control" type="text" required name="sell_price" placeholder="Harga Jual">
-        </div>
-        <div class="form-group">
-          <label class="control-label">Satuan</label>
-            <input class="form-control" type="text" required name="unit" placeholder="Satuan">
+          <label class="control-label">Alamat</label>
+            <input class="form-control" type="text" required name="address" placeholder="Alamat">
         </div>
       </div>
     </div>
-    <a href="{{ route('medicine.index') }}" class="btn btn-default" id="btn-cancel">Batal</a>&nbsp;&nbsp;
+    <a href="{{ route('patient.index') }}" class="btn btn-default" id="btn-cancel">Batal</a>&nbsp;&nbsp;
     <button type="submit" class="btn btn-info">Simpan</button>
     </form>
   </fieldset>

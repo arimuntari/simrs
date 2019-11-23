@@ -9,6 +9,6 @@ class Patient extends Model
     protected $table = "patient";
 
     protected $fillable=[
-    	//"code", "name", "stock", "purchase_price", "sell_price", "unit"
+    	"code", "name", "birthdate", "phone_number", "address"
     ];
 }

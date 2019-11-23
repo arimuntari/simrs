@@ -41,7 +41,7 @@ class helpers {
         return $text;
     }
 
-    public static function kodePenjualan(){
+    public static function codeSelling(){
       $row = DB::table('tr_selling')->orderBy('id', 'desc')->first();
       if(empty($row->kode_penjualan)){
         return "PJ00001";
@@ -49,12 +49,20 @@ class helpers {
         return "PJ".str_pad($row->id + 1, 5, "0", STR_PAD_LEFT);
       }
     }
-    public static function kodePembelian(){
+    public static function codePurchase(){
       $row = DB::table('tr_purchase')->orderBy('id', 'desc')->first();
       if(empty($row->kodePembelian)){
         return "PB00001";
       }else{
         return "PB".str_pad($row->id + 1, 5, "0", STR_PAD_LEFT);
+      }
+    }
+    public static function codePatient(){
+      $row = DB::table('patient')->orderBy('id', 'desc')->first();
+      if(empty($row->code)){
+        return "PT00001";
+      }else{
+        return "PT".str_pad($row->id + 1, 5, "0", STR_PAD_LEFT);
       }
     }
     public static function searchItem($id, $array) {

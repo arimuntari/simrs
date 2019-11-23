@@ -31,7 +31,7 @@
 	              </div>
 	              <div class="col-xs-9 col-md-8 col-lg-8">
 	                <div class="input-group input-group-md">
-	                  <input type="text" name="key" value="{{ $key }}" class="form-control" placeholder="Masukkan Nama Pasien">
+	                  <input type="text" name="key" value="{{ $key }}" class="form-control" placeholder="Masukkan Kode/Nama Pasien">
 	                  <span class="input-group-btn">
 	                      <button type="submit" class="btn btn-warning btn-flat"><i class="fa fa-search"></i> Tampil</button>
 	                  </span>
@@ -59,11 +59,11 @@
 			<thead>
 				<tr class="bg-table">
 					<th  width="50px">No. </th>
-          <th width="150px">Kode Obat</th>
-          <th>Nama Obat </th>
-          <th width="150px">Stok</th>
-          <th width="150px">Harga Jual</th>
-          <th width="150px">Satuan</th>
+          <th width="150px">Kode Pasien</th>
+          <th>Nama Pasien </th>
+          <th width="150px">Tgl. Lahir</th>
+          <th width="150px">No. Telp</th>
+          <th width="150px">Alamat</th>
 					<th width="100px"> &nbsp;</th>
 				</tr>
 			</thead>
@@ -74,9 +74,9 @@
 					<td>{{ $no }}. </td>
           <td>{!! Helper::highLight($patient->code, $key) !!}</td>
 					<td>{!! Helper::highLight($patient->name, $key) !!}</td>
-          <td>{{ $patient->stock }}</td>
-          <td align="right">@rupiah($patient->sell_price) </td>
-          <td>{{ $patient->unit }}</td>
+          <td>{{ $patient->birthdate }}</td>
+          <td align="right">{{ $patient->phone_number }}</td>
+          <td>{{ $patient->address }}</td>
           <td style="word-wrap: nowrap" align="center">
             <form id="delform" action="{{ route('patient.destroy', $patient->id ) }}" method="POST"> 
             {{ method_field('DELETE') }}

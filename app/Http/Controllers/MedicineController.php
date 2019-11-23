@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Medicine;
-class medicineController extends Controller
+class MedicineController extends Controller
 {
     private $title ="Data Obat";
     private $icon ="<i class='fa fa-database'></i>";
