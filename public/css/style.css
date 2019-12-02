@@ -102,6 +102,9 @@ legend {
 .mt-3{
     margin-top:10px;
 }
+.mt-2{
+    margin-top:5px;
+}
 .bg-table{
 	background-image: linear-gradient(#ccc, #efefef);
 	color:#000;
@@ -278,4 +281,18 @@ legend {
 	.login-form .content .input {
  	   width: 100%;
 	}
+}
+.table.table-hover.exam tr{
+    cursor:pointer;
+} 
+.table.exam td, .table.exam th{
+    font-size: 10pt ;
+    padding:3px;
+}
+.form-control.input-xs{
+    padding:3px;
+    height:28;
+}
+.form-control{
+    font-weight: normal;
 }

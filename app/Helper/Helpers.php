@@ -21,7 +21,11 @@ class helpers {
        	 return "Gudang";
        }
     }
-    public static function toIndo($tgl) {
+    public static function toIndo($date) {
+      $date = date('d/m/Y', strtotime(str_replace('-', '/', $date)));
+      return $date;
+    } 
+    public static function formatIndo($tgl) {
       $dt = new  \Carbon\Carbon($tgl);
       setlocale(LC_TIME, 'IND');
         
@@ -63,6 +67,16 @@ class helpers {
         return "PT00001";
       }else{
         return "PT".str_pad($row->id + 1, 5, "0", STR_PAD_LEFT);
+      }
+    }
+    public static function noRegister(){
+      $date = date("Y-m-d");
+      echo $date;
+      $row = DB::table('register')->whereDate('date_register', $date)->orderBy('id', 'desc')->first();
+      if(empty($row->no_register)){
+        return 1;
+      }else{
+        return ($row->no_register+1);
       }
     }
     public static function searchItem($id, $array) {

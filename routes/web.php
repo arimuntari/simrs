@@ -31,4 +31,24 @@ Route::middleware(['checklogin'])->group(function () {
 	    'action' => 'ActionController',
 	    'patient' => 'PatientController',
 	]);
+
+	Route::prefix('register')->group(function () {
+		Route::get('/', 'RegisterController@index')->name('register.index');
+		Route::post('store/', 'RegisterController@store')->name('register.store');
+		Route::get('destroy/{id}', 'RegisterController@destroy')->name('register.destroy');
+		//Route::get('/create', 'SellingController@create')->name('register.create');
+	});
+
+
+	Route::prefix('exam')->group(function () {
+		Route::get('/', 'ExaminationController@index')->name('exam.index');
+		Route::get('destroy/{$id}', 'ExaminationController@destroyDiagnosa')->name('exam.destroyDiagnosa');
+		//Route::get('/create', 'SellingController@create')->name('register.create');
+	});
+
+	Route::prefix('autocomplete')->group(function () {
+		Route::get('patient', 'AutoCompleteController@patient')->name('patient');
+		Route::get('customer', 'AutoCompleteController@customer')->name('customer');
+		Route::get('supplier', 'AutoCompleteController@supplier')->name('supplier');
+	});
 });

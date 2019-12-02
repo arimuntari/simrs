@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
           <label for="name" class="control-label">Tgl. Lahir</label>
-            <input class="form-control" type="text" required name="birthdate" placeholder="Tgl. Pasien">
+            <input class="form-control datepicker" type="text" required name="birthdate" placeholder="Tgl. Pasien">
         </div>
       </div>
       <div class="col-md-6">

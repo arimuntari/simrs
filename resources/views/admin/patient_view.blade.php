@@ -74,7 +74,7 @@
 					<td>{{ $no }}. </td>
           <td>{!! Helper::highLight($patient->code, $key) !!}</td>
 					<td>{!! Helper::highLight($patient->name, $key) !!}</td>
-          <td>{{ $patient->birthdate }}</td>
+          <td>{{ Helper::toIndo($patient->birthdate) }}</td>
           <td align="right">{{ $patient->phone_number }}</td>
           <td>{{ $patient->address }}</td>
           <td style="word-wrap: nowrap" align="center">

@@ -6,6 +6,8 @@
 
   <!-- Template CSS -->
   <link rel="stylesheet" type="text/css" href="{{ asset('assets/bootstrap/dist/css/bootstrap.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/bootstrap-datepicker/dist/css/bootstrap-datepicker.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/select2/dist/css/select2.css') }}">
   <link rel="stylesheet" href="{{ asset('assets/font-awesome/css/all.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
 
@@ -30,8 +32,8 @@
 		<div class="collapse navbar-collapse" id="myNavbar">
 		  <ul class="nav navbar-nav">
 			<li class="active"><a href="#">Home</a></li>
-			<li><a href="pendaftaran.html"><i class="fa fa-user"></i> Pendaftaran Pasien</a></li>
-			<li><a href="#"><i class="fa fa-stethoscope"></i> Pemeriksaan</a></li> 
+			<li><a href="{{ route('register.index') }}"><i class="fa fa-user"></i> Pendaftaran Pasien</a></li>
+			<li><a href="{{ route('exam.index') }}"><i class="fa fa-stethoscope"></i> Pemeriksaan</a></li> 
 			<li class="dropdown">
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i> Transaksi
 				<span class="caret"></span></a>
@@ -78,5 +80,14 @@
 
   <script src="{{ asset('assets/jquery/dist/jquery.min.js') }}"></script>
   <script src="{{ asset('assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
+  <script src="{{ asset('assets/select2/dist/js/select2.min.js') }}"></script>
+  <script>
+	  $(".datepicker").datepicker({
+	  	format: 'yyyy-mm-dd',
+	  	autoclose: true
+	  });	
+  </script>
+  @yield('script')
 </body>
 </html>
