@@ -17,8 +17,8 @@ class CreateCheckupMedicineTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('register_id');
             $table->foreign('register_id')->references('id')->on('register');
-            $table->unsignedBigInteger('action_id');
-            $table->foreign('action_id')->references('id')->on('action');
+            $table->unsignedBigInteger('medicine_id');
+            $table->foreign('medicine_id')->references('id')->on('medicine');
             $table->Integer('amount');
             $table->float('price');
         });

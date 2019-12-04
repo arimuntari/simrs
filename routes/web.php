@@ -42,6 +42,7 @@ Route::middleware(['checklogin'])->group(function () {
 
 	Route::prefix('exam')->group(function () {
 		Route::get('/', 'ExaminationController@index')->name('exam.index');
+		Route::get('/{register_id}', 'ExaminationController@index')->name('exam.view');
 		Route::get('destroy/{$id}', 'ExaminationController@destroyDiagnosa')->name('exam.destroyDiagnosa');
 		//Route::get('/create', 'SellingController@create')->name('register.create');
 	});

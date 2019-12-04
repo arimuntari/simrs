@@ -46,34 +46,32 @@
         <span class="label label-danger">{{ Session::get('fail') }}</span>
       @endif
   	  <div class="table table-responsive mt-3">
-        <form action="{{ route('register.store')  }}" method="POST">
-           @csrf
-      		<table class="table table-bordered table-hover exam">
-      			<thead>
-      				<tr class="bg-table">
-      					<th  width="50px">No. </th>
-                <th nowrap>Kode Pasien</th>
-                <th nowrap>Nama Pasien </th>
-                <th>Tgl. Lahir</th>
-                <th nowrap>Jam. Register</th>
-      				</tr>
-      			</thead>
-      			<tbody>
-              <?php  $no = 1 ; $bg = "";?>
-              @foreach($registers as $register)
-              @if($register->status==1) @php $bg = 'bg-danger' @endphp @endif
-      				<tr class="<?php echo $bg;?>">
-      					<td>{{ $no }}. </td>
-                <td nowrap>{!! $register->patient->code." (".$register->no_register.")" !!}</td>
-      					<td nowrap>{!! $register->patient->name!!}</td>
-                <td nowrap align="center">{{ Helper::toIndo($register->patient->birthdate) }}</td>
-                <td nowrap align="center">{{ $register->time }}</td>
-      				</tr>
-              <?php  $no++ ;?>
-              @endforeach
-      			</tbody>
-      		</table>
-        </form>
+        @csrf
+    		<table class="table table-bordered table-hover exam">
+    			<thead>
+    				<tr class="bg-table">
+    					<th  width="50px">No. </th>
+              <th nowrap>Kode Pasien</th>
+              <th nowrap>Nama Pasien </th>
+              <th>Tgl. Lahir</th>
+              <th nowrap>Jam. Register</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+            <?php  $no = 1 ; $bg = "";?>
+            @foreach($registers as $register)
+            @if($register->status==1) @php $bg = 'bg-danger' @endphp @endif
+    				<tr class="<?php echo $bg;?>"  onclick="window.location.href = '{{route('exam.view', $register->id)}}';">
+    					<td>{{ $no }}. </td>
+              <td nowrap>{!! $register->patient->code." (".$register->no_register.")" !!}</td>
+    					<td nowrap>{!! $register->patient->name!!}</td>
+              <td nowrap align="center">{{ Helper::toIndo($register->patient->birthdate) }}</td>
+              <td nowrap align="center">{{ $register->time }}</td>
+    				</tr>
+            <?php  $no++ ;?>
+            @endforeach
+    			</tbody>
+    		</table>
   	  </div>
     </div>
       <div class="col-md-6">
@@ -96,9 +94,11 @@
             </thead>
             <tbody>
               <?php  $no = 1 ; $bg = "";?>
+              @if(!empty($diagnosis))
+              @foreach($diagnosis as $checkup)
               <tr class="<?php echo $bg;?>">
                 <td>{{ $no }}. </td>
-                <td nowrap>{!! $register->patient->code." (".$register->no_register.")" !!}</td>
+                <td nowrap>{!! $checkup->diagnosis->name !!}</td>
                 <td style="text-align: center;"> 
                   <a type="button" href="{{ route('exam.destroyDiagnosa', $register->id)}}"
                      onclick="if(confirm('Apakah Anda yakin untuk Menghapus Data ini?')){ return true;}" 
@@ -109,6 +109,8 @@
                 </td>
               </tr>
               <?php  $no++ ;?>
+              @endforeach
+              @endif
             </tbody>
           </table>
        </div>
@@ -133,10 +135,12 @@
             </thead>
             <tbody>
               <?php  $no = 1 ; $bg = "";?>
+              @if(!empty($diagnosis))
+              @foreach($actions as $checkup)
               <tr class="<?php echo $bg;?>">
                 <td>{{ $no }}. </td>
-                <td nowrap>{!! $register->patient->code." (".$register->no_register.")" !!}</td>
-                <td></td>
+                <td nowrap>{!! $checkup->action->name !!}</td>
+                <td>{!! $action->price !!}</td>
                 <td style="text-align: center;"> 
                   <a type="button" href="{{ route('exam.destroyDiagnosa', $register->id)}}"
                      onclick="if(confirm('Apakah Anda yakin untuk Menghapus Data ini?')){ return true;}" 
@@ -147,6 +151,8 @@
                 </td>
               </tr>
               <?php  $no++ ;?>
+              @endforeach
+              @endif
             </tbody>
           </table>
        </div>
