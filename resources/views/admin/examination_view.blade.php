@@ -76,6 +76,9 @@
     </div>
       <div class="col-md-6">
         <div class="table table-responsive mt-3">
+          <form action="{{ route('exam.store.diagnosis') }}" method="POST">
+            @csrf
+          <input type="hidden" name="register_id" value="{{ $register_id }}"> 
           <table class="table table-bordered exam">
             <thead>
               <tr class="bg-table">
@@ -88,8 +91,8 @@
               </tr>
               <tr class="bg-table">
                 <th></th>
-                <th><input type="text" class="diagnosis" name="diagnosis_id" style="width:100%;"></th>
-                <th style="text-align: center;"><button type="button" class="btn btn-success btn-sm " name="button-diagnosa"><i class="fa fa-save"></i></button></th>
+                <th><select type="text" class="diagnosis" name="diagnosis_id" style="width:100%;"></select></th>
+                <th style="text-align: center;"><button type="submin" class="btn btn-success btn-sm " name="button-diagnosa"><i class="fa fa-save"></i></button></th>
               </tr>
             </thead>
             <tbody>
@@ -100,7 +103,7 @@
                 <td>{{ $no }}. </td>
                 <td nowrap>{!! $checkup->diagnosis->name !!}</td>
                 <td style="text-align: center;"> 
-                  <a type="button" href="{{ route('exam.destroyDiagnosa', $register->id)}}"
+                  <a type="button" href="{{ route('exam.destroy.diagnosis', $checkup->id)}}"
                      onclick="if(confirm('Apakah Anda yakin untuk Menghapus Data ini?')){ return true;}" 
                     class="btn btn-danger btn-sm" 
                     title="Tombol Untuk Hapus">
@@ -113,8 +116,12 @@
               @endif
             </tbody>
           </table>
+          </form>
        </div>
         <div class="table table-responsive mt-3">
+          <form action="{{ route('exam.store.action') }}" method="POST">
+            @csrf
+          <input type="hidden" name="register_id" value="{{ $register_id }}"> 
           <table class="table table-bordered exam">
             <thead>
               <tr class="bg-table">
@@ -123,26 +130,26 @@
               <tr class="bg-table">
                 <th width="30"></th>
                 <th>Nama Tindakan</th>
-                <th>Harga</th>
+                <th width="50">Harga</th>
                 <th></th>
               </tr>
               <tr class="bg-table">
                 <th></th>
-                <th ><input type="text" name="diagnosa_id" style="width:100%;"></th>
-                <th></th>
-                <th style="text-align: center;"><button type="button" class="btn btn-success btn-sm " name="button-diagnosa"><i class="fa fa-save"></i></button></th>
+                <th><select type="text" class="form-control input-xs action" onchange="getAction()" name="action_id" style="width:100%;"></select></th>
+                <th width="100px"><input type="text" class="form-control input-xs" readonly id="price" name="price" style="width:100%;"></th>
+                <th style="text-align: center;"><button type="submit" class="btn btn-success btn-sm " name="button-diagnosa"><i class="fa fa-save"></i></button></th>
               </tr>
             </thead>
             <tbody>
               <?php  $no = 1 ; $bg = "";?>
-              @if(!empty($diagnosis))
+              @if(!empty($actions))
               @foreach($actions as $checkup)
               <tr class="<?php echo $bg;?>">
                 <td>{{ $no }}. </td>
                 <td nowrap>{!! $checkup->action->name !!}</td>
-                <td>{!! $action->price !!}</td>
+                <td align="right">@rupiah($checkup->price)</td>
                 <td style="text-align: center;"> 
-                  <a type="button" href="{{ route('exam.destroyDiagnosa', $register->id)}}"
+                  <a type="button" href="{{ route('exam.destroy.action', $checkup->id)}}"
                      onclick="if(confirm('Apakah Anda yakin untuk Menghapus Data ini?')){ return true;}" 
                     class="btn btn-danger btn-sm" 
                     title="Tombol Untuk Hapus">
@@ -155,6 +162,55 @@
               @endif
             </tbody>
           </table>
+          </form>
+       </div>
+        <div class="table table-responsive mt-3">
+          <form action="{{ route('exam.store.medicine') }}" method="POST">
+            @csrf
+          <input type="hidden" name="register_id" value="{{ $register_id }}"> 
+          <table class="table table-bordered exam">
+            <thead>
+              <tr class="bg-table">
+                <th colspan="4">Pemeriksaan Tindakan</th>
+              </tr>
+              <tr class="bg-table">
+                <th width="30"></th>
+                <th>Nama Tindakan</th>
+                <th width="50">Jumlah</th>
+                <th width="50">Harga</th>
+                <th></th>
+              </tr>
+              <tr class="bg-table">
+                <th></th>
+                <th><select type="text" class="form-control input-xs medicine" onchange="getMedicine()" name="action_id" style="width:100%;"></select></th>
+                <th width="60px"><input type="text" class="form-control input-xs" id="jumlah" name="amount" style="width:100%;"></th>
+                <th width="100px"><input type="text" class="form-control input-xs" readonly id="price2" name="price" style="width:100%;"></th>
+                <th style="text-align: center;"><button type="submit" class="btn btn-success btn-sm " name="button-diagnosa"><i class="fa fa-save"></i></button></th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php  $no = 1 ; $bg = "";?>
+              @if(!empty($medicines))
+              @foreach($medicines as $checkup)
+              <tr class="<?php echo $bg;?>">
+                <td>{{ $no }}. </td>
+                <td nowrap>{!! $checkup->medicine->name !!}</td>
+                <td align="right">@rupiah($checkup->price)</td>
+                <td style="text-align: center;"> 
+                  <a type="button" href="{{ route('exam.destroy.action', $checkup->id)}}"
+                     onclick="if(confirm('Apakah Anda yakin untuk Menghapus Data ini?')){ return true;}" 
+                    class="btn btn-danger btn-sm" 
+                    title="Tombol Untuk Hapus">
+                    <i class="fa fa-trash"></i>
+                  </a>
+                </td>
+              </tr>
+              <?php  $no++ ;?>
+              @endforeach
+              @endif
+            </tbody>
+          </table>
+          </form>
        </div>
       </div>
     </div>
@@ -166,23 +222,18 @@
 
 @section('script')
 <script>
-   $('.diagnosis').select2({
-    placeholder: 'Cari Patient...',
+  $('.diagnosis').select2({
+    placeholder: 'Cari Diagnosis...',
     ajax: {
-      url: '/autocomplete/patient',
+      url: '/autocomplete/diagnosis',
       dataType: 'json',
       delay: 250,
       processResults: function (data) {
         return {
           results:  $.map(data, function (item) {
             return {
-              text: item.code+" | "+item.name,
-              id: item.id,
-              code: item.code,
-              name: item.name,
-              birthdate: item.birthdate,
-              phone_number: item.phone_number,
-              address: item.address
+              text: item.name,
+              id: item.id
             }
           })
         };
@@ -190,5 +241,59 @@
       cache: true
     }
   });
+
+  $('.action').select2({
+    placeholder: 'Cari Tindakan...',
+    ajax: {
+      url: '/autocomplete/action',
+      dataType: 'json',
+      delay: 250,
+      processResults: function (data) {
+        return {
+          results:  $.map(data, function (item) {
+            return {
+              text: item.name+" | "+item.price,
+              price: item.price,
+              id: item.id
+            }
+          })
+        };
+      },
+      cache: true
+    }
+  });
+
+  function getAction(){
+    var data = $('.action').select2('data'); 
+    $("#price").val(data[0].price);
+  }
+
+  $('.medicine').select2({
+    placeholder: 'Cari Obat...',
+    ajax: {
+      url: '/autocomplete/medicine',
+      dataType: 'json',
+      delay: 250,
+      processResults: function (data) {
+        return {
+          results:  $.map(data, function (item) {
+            return {
+              text: item.code+" | "+item.name+" | "+item.stock,
+              code: item.code,
+              stock: item.stock,
+              price: item.sell_price,
+              id: item.id
+            }
+          })
+        };
+      },
+      cache: true
+    }
+  });
+
+  function getMedicine(){
+    var data = $('.medicine').select2('data'); 
+    $("#price2").val(data[0].price);
+  }
 </script>
 @endsection('script')

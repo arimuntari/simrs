@@ -43,13 +43,19 @@ Route::middleware(['checklogin'])->group(function () {
 	Route::prefix('exam')->group(function () {
 		Route::get('/', 'ExaminationController@index')->name('exam.index');
 		Route::get('/{register_id}', 'ExaminationController@index')->name('exam.view');
-		Route::get('destroy/{$id}', 'ExaminationController@destroyDiagnosa')->name('exam.destroyDiagnosa');
+		Route::post('store/diagnosis', 'ExaminationController@storeDiagnosis')->name('exam.store.diagnosis');
+		Route::get('destroy/diagnois/{id}', 'ExaminationController@destroyDiagnosis')->name('exam.destroy.diagnosis');
+		Route::post('store/action', 'ExaminationController@storeAction')->name('exam.store.action');
+		Route::get('destroy/action/{id}', 'ExaminationController@destroyAction')->name('exam.destroy.action');
+		Route::post('store/medicine', 'ExaminationController@storeMedicine')->name('exam.store.medicine');
+		Route::get('destroy/medicine/{id}', 'ExaminationController@destroyMedicine')->name('exam.destroy.medicine');
 		//Route::get('/create', 'SellingController@create')->name('register.create');
 	});
 
 	Route::prefix('autocomplete')->group(function () {
 		Route::get('patient', 'AutoCompleteController@patient')->name('patient');
-		Route::get('customer', 'AutoCompleteController@customer')->name('customer');
-		Route::get('supplier', 'AutoCompleteController@supplier')->name('supplier');
+		Route::get('diagnosis', 'AutoCompleteController@diagnosis')->name('diagnosis');
+		Route::get('action', 'AutoCompleteController@action')->name('action');
+		Route::get('medicine', 'AutoCompleteController@medicine')->name('medicine');
 	});
 });

@@ -8,7 +8,7 @@ class CheckupAction extends Model
 {
     protected $table = "checkup_action";
 
-
+	public $timestamps = false;
     protected $fillable=[
     	"register_id", "action_id", "price"
     ];

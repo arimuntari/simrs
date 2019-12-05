@@ -8,7 +8,7 @@ class CheckupDiagnosis extends Model
 {
     protected $table = "checkup_diagnosis";
 
-
+	public $timestamps = false;
     protected $fillable=[
     	"register_id", "diagnosis_id"
     ];
