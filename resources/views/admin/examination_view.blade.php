@@ -327,7 +327,7 @@
   function checkAmount(){
     var data = $('.medicine').select2('data'); 
     amount =  $("#amount").val();
-    if(amount > data[0].stock ){
+    if(parseInt(amount) > parseInt(data[0].stock) ){
       alert("Jumlah tidak boleh lebih besar dari stock!!");
       $("#amount").val(data[0].stock);
     }
