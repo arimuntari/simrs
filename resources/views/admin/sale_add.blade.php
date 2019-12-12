@@ -93,7 +93,7 @@
   function checkAmount(){
     var data = $('.medicine').select2('data'); 
     amount =  $("#amount").val();
-    if(amount > data[0].stock ){
+    if(parseInt(amount) > parseInt(data[0].stock) ){
       alert("Jumlah tidak boleh lebih besar dari stock!!");
       $("#amount").val(data[0].stock);
     }
@@ -113,7 +113,7 @@
       alert("Anda Belum Memilih Barang");
     }else if(amount == ''){
       alert("Anda Belum Memasukkan Jumlah");
-    }else if(stock < amount){
+    }else if(parseInt(stock) < parseInt(amount)){
       alert("Stok Kurang");
     }else{
       data = { medicine_id :medicine_id, amount : amount };
