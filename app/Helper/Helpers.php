@@ -47,7 +47,7 @@ class helpers {
 
     public static function codeSale(){
       $row = DB::table('sale')->orderBy('id', 'desc')->first();
-      if(empty($row->kode_penjualan)){
+      if(empty($row->code)){
         return "PJ00001";
       }else{
         return "PJ".str_pad($row->id + 1, 5, "0", STR_PAD_LEFT);

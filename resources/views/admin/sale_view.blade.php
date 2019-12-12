@@ -72,27 +72,26 @@
 				<tr>
 					<td>{{ $no }}. </td>
           <td>{!! Helper::highLight($sale->code, $key) !!}</td>
-					<td>{!! Helper::highLight($sale->name, $key) !!}</td>
-          <td>{{ Helper::toIndo($sale->birthdate) }}</td>
-          <td align="right">{{ $sale->phone_number }}</td>
-          <td>{{ $sale->address }}</td>
+          <td>{{ Helper::toIndo($sale->sale_date) }}</td>
+          <td align="right"> @rupiah($sale->price_total)</td>
+          <td>{{ $sale->User->name }}</td>
           <td style="word-wrap: nowrap" align="center">
-            <form id="delform" action="{{ route('sale.destroy', $sale->id ) }}" method="POST"> 
-            {{ method_field('DELETE') }}
-            @csrf
-            <a href="{{ route('sale.edit', $sale->id ) }}" 
-            class="btn btn-warning btn-sm" 
-            title="Tombol Untuk Edit">
-              <i class="fa fa-edit"></i>
-            </a>&nbsp;&nbsp;
-             <button type="button" 
-              onclick="if(confirm('Apakah Anda yakin untuk Menghapus Data ini?')){ submit();}" 
-              class="btn btn-danger btn-sm" 
-              title="Tombol Untuk Hapus">
-              <i class="fa fa-trash"></i>
-             </button>
-            </form>
-          </td>
+              <form id="delform" action="{{ route('sale.destroy', $sale->id ) }}" method="POST"> 
+                 @csrf
+                <a href="{{ route('sale.detail', $sale->id) }}" 
+                class="btn btn-default btn-sm" 
+                title="Tombol Untuk View">
+                <i class="fa fa-search"></i>
+               </a>
+               &nbsp;&nbsp;
+               <button type="button" 
+                onclick="if(confirm('Apakah Anda yakin untuk Menghapus Data ini?')){ submit();}" 
+                class="btn btn-danger btn-sm" 
+                title="Tombol Untuk Hapus">
+                <i class="fa fa-trash"></i>
+               </button>
+               </form>
+            </td>
 				</tr>
         <?php  $no++ ;?>
         @endforeach

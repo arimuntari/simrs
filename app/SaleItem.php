@@ -8,13 +8,11 @@ class SaleItem extends Model
 {
     protected $table = "sale_item";
 
+    public $timestamps = false;
     protected $fillable=[
     	"sale_id", "medicine_id", "amount", "price"
     ];
 
-    protected $attributes=[
-    	"price_total" => 0
-    ];
     
     public function medicine()
     {

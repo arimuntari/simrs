@@ -9,6 +9,8 @@
   <fieldset>
 	  <legend><h4> {!! $icon." ".$title !!}</h4></legend>
 
+    <form  action="{{ route('sale.store') }}" autocomplete="off" method="post" enctype="multipart/form-data">
+      @csrf
     <div class="table table-responsive mt-3" style="margin-bottom: 0px;">
       <table class="table table-bordered" style="margin-bottom: 0px;">
         <tr class="bg-table">
@@ -48,18 +50,12 @@
         </tr>
 			</thead>
       <tbody id="list-item">
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
       </tbody>
     </table>
+  </div>
+  <button type="submit" class="btn btn-success btn-sm">Simpan</button>
+</form>
   </fieldset>
-  <td></td>
   </section>
   <!-- /.content -->
 </div>

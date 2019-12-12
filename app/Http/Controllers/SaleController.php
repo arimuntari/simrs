@@ -76,7 +76,7 @@ class SaleController extends Controller
             $sale->code = Helpers::codeSale();
             $sale->sale_date = $request->sale_date;
             $sale->users_id = $request->session()->get('login_id');
-            $sale->total = $request->total;
+            $sale->price_total = $request->total;
             $sale->save();
             foreach($listitems as $item){
                 $sale_item = new SaleItem;
@@ -87,7 +87,7 @@ class SaleController extends Controller
                 $sale_item->save();
 
                 $medicine = Medicine::find($item['medicine_id']);
-                $medicine->stock = $item->stock -  $sale_item->amount ;
+                $medicine->stock = $medicine->stock -  $sale_item->amount ;
                 $medicine->update();
             }
             $request->session()->flash('status', 'Insert Penjualan Berhasil!!');
@@ -101,8 +101,8 @@ class SaleController extends Controller
     public function destroy($id){
         $sellitems = SaleItem::where("sale_id", $id)->get();
         foreach($sellitems as $lisitem){
-            $medicine = Medicine::find($lisitem->id_barang);
-            $medicine->stock = $medicine->stock +  $lisitem->amount ;
+            $medicine = Medicine::find($lisitem->medicine_id);
+            $medicine->stock = $medicine->stock + $lisitem->amount ;
             $medicine->update();
 
             $lisitem->delete();
@@ -112,9 +112,8 @@ class SaleController extends Controller
           return redirect('sale');
     }
     public function detail($id){
-       
-        $sale = Sale::with('sale.item')->where('id', $id)->first();
-       
-        return view("admin/selling_detail", ['sale' => $sale, 'title' => $this->title]); 
+        $sale["detail"] = Sale::where('id', $id)->first();
+        $sale["item"] = Sale::where('id', $id)->first()->SaleItem;
+        return view("admin/sale_detail", ['sale' => $sale, 'title' => $this->title, 'icon' => $this->icon]); 
     }
 }
