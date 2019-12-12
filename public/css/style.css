@@ -105,6 +105,9 @@ legend {
 .mt-2{
     margin-top:5px;
 }
+.my-0{
+    margin:5px;
+}
 .bg-table{
 	background-image: linear-gradient(#ccc, #efefef);
 	color:#000;
@@ -298,4 +301,7 @@ legend {
 }
 input{
     font-weight: normal;
+}
+.exam-content form, .exam-content .exam{
+    margin:0px;
 }

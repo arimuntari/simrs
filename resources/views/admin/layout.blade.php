@@ -38,8 +38,8 @@
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-shopping-cart"></i> Transaksi
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-				  <li><a href="#">Penjualan</a></li>
-				  <li><a href="#">Pembelian</a></li>
+				  <li><a href="{{ route('sale.index') }}">Penjualan</a></li>
+				  <li><a href="{{ route('purchase.index') }}">Pembelian</a></li>
 				</ul>
 			</li>
 			<li class="dropdown">

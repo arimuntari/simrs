@@ -8,6 +8,7 @@ use App\Patient;
 use App\CheckupDiagnosis;
 use App\CheckupAction;
 use App\CheckupMedicine;
+use App\Medicine;
 use Helper;
 use Carbon\carbon;
 
@@ -83,8 +84,11 @@ class ExaminationController extends Controller
     }
 
     function storeMedicine(Request $request){
-        $Checkup = CheckupMedicine::create($request->all());
-        if($Checkup){
+        $checkup = CheckupMedicine::create($request->all());
+        if($checkup){
+            $medicine = Medicine::find($request->medicine_id);
+            $medicine->stock = $medicine->stock - $request->amount;
+            $medicine->save();
             session()->flash('success', 'Tambah Data Berhasil!!');
             return redirect()->route('exam.view', $request->register_id);
         }
@@ -92,11 +96,28 @@ class ExaminationController extends Controller
     }
     function destroyMedicine($id){
         $checkup = CheckupMedicine::find($id);
+        $amount = $checkup->amount;
+        $medicine_id = $checkup->medicine_id;
         if($checkup->delete()){
+            $medicine = Medicine::find($medicine_id);
+            $medicine->stock = $medicine->stock + $amount;
+            $medicine->save();
             session()->flash('success', 'Hapus Data Berhasil!!');
             return redirect()->back();
         }
         session()->flash('fail', 'Data Terikat Dengan Data Lain!!');
+        return redirect()->back();
+    }
+    function saveExam(Request $request){
+        $id = $request->register_id;
+        $register = Register::find($id);
+        $register->price_total = $request->price_total;
+        $register->status = 1;
+        if($register->save()){
+            session()->flash('success', 'Pemeriksaan Selesail!!');
+            return redirect()->back();
+        }
+        session()->flash('fail', 'Pemeriksaan error!!');
         return redirect()->back();
     }
 }

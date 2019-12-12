@@ -12,4 +12,10 @@ class CheckupMedicine extends Model
     protected $fillable=[
     	"register_id", "medicine_id", "amount", "price"
     ];
+
+    public function medicine()
+    {
+        return $this->belongsTo('App\Medicine', 'medicine_id', 'id');
+    }
+
 }

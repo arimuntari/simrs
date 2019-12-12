@@ -4,7 +4,8 @@
 @section('title', $title)
 
 @section('content')
-<div class="container">
+<?php $harga = 0;?>
+<div class="container exam-content">
   <section class="content">
   <fieldset>
 	  <legend><h4> {!! $icon." ".$title !!}</h4></legend>
@@ -60,6 +61,7 @@
     			<tbody>
             <?php  $no = 1 ; $bg = "";?>
             @foreach($registers as $register)
+            <?php $bg = '';?>
             @if($register->status==1) @php $bg = 'bg-danger' @endphp @endif
     				<tr class="<?php echo $bg;?>"  onclick="window.location.href = '{{route('exam.view', $register->id)}}';">
     					<td>{{ $no }}. </td>
@@ -75,7 +77,7 @@
   	  </div>
     </div>
       <div class="col-md-6">
-        <div class="table table-responsive mt-3">
+        <div class="table table-responsive my-0">
           <form action="{{ route('exam.store.diagnosis') }}" method="POST">
             @csrf
           <input type="hidden" name="register_id" value="{{ $register_id }}"> 
@@ -99,6 +101,7 @@
               <?php  $no = 1 ; $bg = "";?>
               @if(!empty($diagnosis))
               @foreach($diagnosis as $checkup)
+
               <tr class="<?php echo $bg;?>">
                 <td>{{ $no }}. </td>
                 <td nowrap>{!! $checkup->diagnosis->name !!}</td>
@@ -118,7 +121,7 @@
           </table>
           </form>
        </div>
-        <div class="table table-responsive mt-3">
+        <div class="table table-responsive my-0">
           <form action="{{ route('exam.store.action') }}" method="POST">
             @csrf
           <input type="hidden" name="register_id" value="{{ $register_id }}"> 
@@ -141,9 +144,10 @@
               </tr>
             </thead>
             <tbody>
-              <?php  $no = 1 ; $bg = "";?>
+              <?php  $no = 1 ; $bg = "";$totalAction = 0;?>
               @if(!empty($actions))
               @foreach($actions as $checkup)
+              <?php $totalAction += $checkup->price;?>
               <tr class="<?php echo $bg;?>">
                 <td>{{ $no }}. </td>
                 <td nowrap>{!! $checkup->action->name !!}</td>
@@ -159,45 +163,52 @@
               </tr>
               <?php  $no++ ;?>
               @endforeach
+              <tr>
+                <td colspan="2" align="right">Total Tindakan:</td>
+                <td align="right">@rupiah($totalAction)</td>
+                <td></td>
+              </tr>
               @endif
             </tbody>
           </table>
           </form>
        </div>
-        <div class="table table-responsive mt-3">
+        <div class="table table-responsive my-0">
           <form action="{{ route('exam.store.medicine') }}" method="POST">
             @csrf
           <input type="hidden" name="register_id" value="{{ $register_id }}"> 
           <table class="table table-bordered exam">
             <thead>
               <tr class="bg-table">
-                <th colspan="4">Pemeriksaan Tindakan</th>
+                <th colspan="5">Pemeriksaan Obat</th>
               </tr>
               <tr class="bg-table">
                 <th width="30"></th>
-                <th>Nama Tindakan</th>
+                <th>Nama Obat</th>
                 <th width="50">Jumlah</th>
                 <th width="50">Harga</th>
                 <th></th>
               </tr>
               <tr class="bg-table">
                 <th></th>
-                <th><select type="text" class="form-control input-xs medicine" onchange="getMedicine()" name="action_id" style="width:100%;"></select></th>
-                <th width="60px"><input type="text" class="form-control input-xs" id="jumlah" name="amount" style="width:100%;"></th>
+                <th><select type="text" class="form-control input-xs medicine" onchange="getMedicine()" name="medicine_id" style="width:100%;"></select></th>
+                <th width="60px"><input type="text" class="form-control input-xs" onkeyup="checkAmount();" id="amount" name="amount" style="width:100%;"></th>
                 <th width="100px"><input type="text" class="form-control input-xs" readonly id="price2" name="price" style="width:100%;"></th>
                 <th style="text-align: center;"><button type="submit" class="btn btn-success btn-sm " name="button-diagnosa"><i class="fa fa-save"></i></button></th>
               </tr>
             </thead>
             <tbody>
-              <?php  $no = 1 ; $bg = "";?>
+              <?php  $no = 1 ; $bg = "";$totalMedicine = 0;?>
               @if(!empty($medicines))
               @foreach($medicines as $checkup)
+              <?php $totalMedicine += $checkup->price;?>
               <tr class="<?php echo $bg;?>">
                 <td>{{ $no }}. </td>
                 <td nowrap>{!! $checkup->medicine->name !!}</td>
+                <td nowrap>{!! $checkup->amount !!}</td>
                 <td align="right">@rupiah($checkup->price)</td>
                 <td style="text-align: center;"> 
-                  <a type="button" href="{{ route('exam.destroy.action', $checkup->id)}}"
+                  <a type="button" href="{{ route('exam.destroy.medicine', $checkup->id)}}"
                      onclick="if(confirm('Apakah Anda yakin untuk Menghapus Data ini?')){ return true;}" 
                     class="btn btn-danger btn-sm" 
                     title="Tombol Untuk Hapus">
@@ -207,9 +218,25 @@
               </tr>
               <?php  $no++ ;?>
               @endforeach
+              <tr>
+                <td colspan="3" align="right">Total Obat:</td>
+                <td align="right">@rupiah($totalMedicine)</td>
+                <td></td>
+              </tr>
               @endif
+              <tr>
+                <td colspan="3" align="right">Total Pembayaran:</td>
+                <td align="right">@rupiah($totalMedicine+$totalAction)</td>
+                <td></td>
+              </tr>
             </tbody>
           </table>
+          </form><br>
+          <form action="{{ route('exam.save') }}" method="POST">
+            @csrf
+            <input type="hidden" name="register_id" value="{{ $register_id}}">
+            <input type="hidden" name="price_total" value="{{ $totalMedicine+$totalAction}}">
+            <button type="submit" class="btn btn-success btn-sm">Selesai Pemeriksaan</button>
           </form>
        </div>
       </div>
@@ -278,7 +305,7 @@
         return {
           results:  $.map(data, function (item) {
             return {
-              text: item.code+" | "+item.name+" | "+item.stock,
+              text: item.code+" | "+item.name+" | "+item.stock+" | "+item.sell_price,
               code: item.code,
               stock: item.stock,
               price: item.sell_price,
@@ -294,6 +321,16 @@
   function getMedicine(){
     var data = $('.medicine').select2('data'); 
     $("#price2").val(data[0].price);
+    checkAmount();
+  }
+
+  function checkAmount(){
+    var data = $('.medicine').select2('data'); 
+    amount =  $("#amount").val();
+    if(amount > data[0].stock ){
+      alert("Jumlah tidak boleh lebih besar dari stock!!");
+      $("#amount").val(data[0].stock);
+    }
   }
 </script>
 @endsection('script')

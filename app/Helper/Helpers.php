@@ -45,8 +45,8 @@ class helpers {
         return $text;
     }
 
-    public static function codeSelling(){
-      $row = DB::table('tr_selling')->orderBy('id', 'desc')->first();
+    public static function codeSale(){
+      $row = DB::table('sale')->orderBy('id', 'desc')->first();
       if(empty($row->kode_penjualan)){
         return "PJ00001";
       }else{
@@ -82,7 +82,7 @@ class helpers {
     public static function searchItem($id, $array) {
       if(!empty($array)){
          foreach ($array as $key => $val) {
-             if ($val['id_barang'] === $id) {
+             if ($val['medicine_id'] === $id) {
                  return $key;
              }
          }
