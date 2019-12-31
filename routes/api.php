@@ -18,3 +18,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('login', 'Api\LoginController@login');
+Route::post('pasien', 'Api\PatientController@update');
+Route::post('register', 'Api\RegisterController@register');
+Route::post('register/queue', 'Api\RegisterController@queue');
+Route::post('register/myqueue', 'Api\RegisterController@myQueue');
+Route::post('exam/view', 'Api\ExamController@index');
+Route::post('exam/total', 'Api\ExamController@total');

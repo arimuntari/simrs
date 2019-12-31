@@ -79,15 +79,15 @@ class SaleController extends Controller
             $sale->price_total = $request->total;
             $sale->save();
             foreach($listitems as $item){
-                $sale_item = new SaleItem;
-                $sale_item->sale_id = $sale->id;
-                $sale_item->medicine_id = $item['medicine_id'];
-                $sale_item->price = $item['price'];
-                $sale_item->amount = $item['amount'];
-                $sale_item->save();
+                $saleItem = new SaleItem;
+                $saleItem->sale_id = $sale->id;
+                $saleItem->medicine_id = $item['medicine_id'];
+                $saleItem->price = $item['price'];
+                $saleItem->amount = $item['amount'];
+                $saleItem->save();
 
                 $medicine = Medicine::find($item['medicine_id']);
-                $medicine->stock = $medicine->stock -  $sale_item->amount ;
+                $medicine->stock = $medicine->stock -  $saleItem->amount ;
                 $medicine->update();
             }
             $request->session()->flash('status', 'Insert Penjualan Berhasil!!');
@@ -99,17 +99,17 @@ class SaleController extends Controller
 
     }
     public function destroy($id){
-        $sellitems = SaleItem::where("sale_id", $id)->get();
-        foreach($sellitems as $lisitem){
-            $medicine = Medicine::find($lisitem->medicine_id);
-            $medicine->stock = $medicine->stock + $lisitem->amount ;
+        $saleItems = SaleItem::where("sale_id", $id)->get();
+        foreach($saleItems as $listItem){
+            $medicine = Medicine::find($listItem->medicine_id);
+            $medicine->stock = $medicine->stock + $listItem->amount ;
             $medicine->update();
 
-            $lisitem->delete();
+            $listItem->delete();
         }
         $sale = Sale::find($id);
         $sale->delete();
-          return redirect('sale');
+        return redirect('sale');
     }
     public function detail($id){
         $sale["detail"] = Sale::where('id', $id)->first();

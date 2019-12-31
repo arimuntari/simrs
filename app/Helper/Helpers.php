@@ -54,7 +54,7 @@ class helpers {
       }
     }
     public static function codePurchase(){
-      $row = DB::table('tr_purchase')->orderBy('id', 'desc')->first();
+      $row = DB::table('purchase')->orderBy('id', 'desc')->first();
       if(empty($row->kodePembelian)){
         return "PB00001";
       }else{
@@ -71,7 +71,6 @@ class helpers {
     }
     public static function noRegister(){
       $date = date("Y-m-d");
-      echo $date;
       $row = DB::table('register')->whereDate('date_register', $date)->orderBy('id', 'desc')->first();
       if(empty($row->no_register)){
         return 1;
