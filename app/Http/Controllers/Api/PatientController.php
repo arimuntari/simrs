@@ -31,7 +31,7 @@ class PatientController extends Controller
     }
 
     function update(Request $request){
-    	$id = $request->id;
+    	$id = $request->patient_id;
     	$patient = Patient::find($id);
         if($patient->update($request->all())){
             $response["errCode"] = "";
