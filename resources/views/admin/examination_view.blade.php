@@ -201,12 +201,12 @@
               <?php  $no = 1 ; $bg = "";$totalMedicine = 0;?>
               @if(!empty($medicines))
               @foreach($medicines as $checkup)
-              <?php $totalMedicine += $checkup->price;?>
+              <?php $totalMedicine += ($checkup->price*$checkup->amount);?>
               <tr class="<?php echo $bg;?>">
                 <td>{{ $no }}. </td>
-                <td nowrap>{!! $checkup->medicine->name !!}</td>
+                <td nowrap>{!! $checkup->medicine->name !!} |  @rupiah($checkup->price)</td>
                 <td nowrap>{!! $checkup->amount !!}</td>
-                <td align="right">@rupiah($checkup->price)</td>
+                <td align="right">@rupiah($checkup->price*$checkup->amount)</td>
                 <td style="text-align: center;"> 
                   <a type="button" href="{{ route('exam.destroy.medicine', $checkup->id)}}"
                      onclick="if(confirm('Apakah Anda yakin untuk Menghapus Data ini?')){ return true;}" 
@@ -327,9 +327,11 @@
   function checkAmount(){
     var data = $('.medicine').select2('data'); 
     amount =  $("#amount").val();
+    price = parseInt(data[0].sell_price);
     if(parseInt(amount) > parseInt(data[0].stock) ){
       alert("Jumlah tidak boleh lebih besar dari stock!!");
       $("#amount").val(data[0].stock);
+      $("#price2").val(price*amount);
     }
   }
 </script>
