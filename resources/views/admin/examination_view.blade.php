@@ -186,14 +186,15 @@
                 <th width="30"></th>
                 <th>Nama Obat</th>
                 <th width="50">Jumlah</th>
-                <th width="50">Harga</th>
+                <th width="50">Total</th>
                 <th></th>
               </tr>
               <tr class="bg-table">
                 <th></th>
                 <th><select type="text" class="form-control input-xs medicine" onchange="getMedicine()" name="medicine_id" style="width:100%;"></select></th>
                 <th width="60px"><input type="text" class="form-control input-xs" onkeyup="checkAmount();" id="amount" name="amount" style="width:100%;"></th>
-                <th width="100px"><input type="text" class="form-control input-xs" readonly id="price2" name="price" style="width:100%;"></th>
+                <th width="100px"><input type="hidden" class="form-control input-xs" readonly id="price2" name="price" style="width:100%;">
+                  <input type="text" class="form-control input-xs" readonly id="total" name="total" style="width:100%;"></th>
                 <th style="text-align: center;"><button type="submit" class="btn btn-success btn-sm " name="button-diagnosa"><i class="fa fa-save"></i></button></th>
               </tr>
             </thead>
@@ -326,13 +327,15 @@
 
   function checkAmount(){
     var data = $('.medicine').select2('data'); 
-    amount =  $("#amount").val();
-    price = parseInt(data[0].sell_price);
-    if(parseInt(amount) > parseInt(data[0].stock) ){
+    amount =  parseInt($("#amount").val());
+    price = parseInt(data[0].price);
+    if(amount > parseInt(data[0].stock) ){
       alert("Jumlah tidak boleh lebih besar dari stock!!");
       $("#amount").val(data[0].stock);
-      $("#price2").val(price*amount);
+    }else{
+      $("#total").val(price*amount);   
     }
+
   }
 </script>
 @endsection('script')
