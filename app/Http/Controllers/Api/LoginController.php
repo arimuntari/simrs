@@ -20,7 +20,7 @@ class LoginController extends Controller
                      'id' => $user->id,
                      'code' => $user->code, 
                      'name' => $user->name, 
-                     'birthdate' => Helper::toIndo($user->birthdate), 
+                     'birthdate' => $user->birthdate, 
                      'phone_number' => $user->phone_number,
                      'address' =>  $user->address);
     		
