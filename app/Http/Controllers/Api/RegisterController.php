@@ -46,7 +46,7 @@ class RegisterController extends Controller
     	return json_encode($response);
 	}
 	function queue(){
-		$register= Register::whereDate("date_register", Carbon::today()->toDateString())->where('status', '1')->first();
+		$register= Register::whereDate("date_register", Carbon::today()->toDateString())->where('status', '1')->orderBy("date_register", "desc")->first();
 		if($register){
 			 $response["errCode"] = "";
     		$response["errMessage"] = "";
