@@ -18,7 +18,7 @@ class RegisterController extends Controller
 
         $patient_id = $patient->id;
 
-        $register= Register::whereDate("date_register", Carbon::today()->toDateString())->first();
+        $register= Register::whereDate("date_register", Carbon::today()->toDateString())->where("patient_id", $patient_id)->first();
         if(!$register){
 	        $register = new Register;
 	        $register->no_register = Helper::noRegister();
