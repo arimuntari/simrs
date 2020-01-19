@@ -72,7 +72,7 @@
 				<tr>
 					<td>{{ $no }}. </td>
           <td>{!! Helper::highLight($purchase->code, $key) !!}</td>
-          <td>{{ Helper::toIndo($purchase->sale_date) }}</td>
+          <td>{{ Helper::formatIndo($purchase->sale_date) }}</td>
           <td align="right"> @rupiah($purchase->price_total)</td>
           <td>{{ $purchase->User->name }}</td>
           <td style="word-wrap: nowrap" align="center">

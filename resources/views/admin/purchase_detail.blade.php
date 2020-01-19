@@ -19,7 +19,7 @@
             <td>{{ $purchase["detail"]->code }}</td>
             <td width:150px>Tanggal</td>
             <td>:</td>
-            <td>{{ Helper::toIndo($purchase["detail"]->purchase_date) }}</td>
+            <td>{{ Helper::formatIndo($purchase["detail"]->purchase_date) }}</td>
         </tr>
       </table>
     </div>

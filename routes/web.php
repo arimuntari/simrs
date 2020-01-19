@@ -20,9 +20,7 @@ Route::post('/login', 'LoginController@login')->name('proses_login');
 
 Route::middleware(['checklogin'])->group(function () {
 	Route::get('/logout', 'LoginController@logout')->name('logout');
-	Route::get('/index', function () {
-	    	return view('admin/index', ['title' => "Dashboard"]);
-	});
+	Route::get('/index', 'DashboardController@index')->name('dashboard');
 
     Route::resources([
 	    'users' => 'UsersController',
@@ -81,5 +79,17 @@ Route::middleware(['checklogin'])->group(function () {
 		Route::get('diagnosis', 'AutoCompleteController@diagnosis')->name('diagnosis');
 		Route::get('action', 'AutoCompleteController@action')->name('action');
 		Route::get('medicine', 'AutoCompleteController@medicine')->name('medicine');
+	});
+
+	Route::prefix('report')->group(function () {
+		Route::get('report/income', 'ReportController@income')->name('report.income');
+		Route::get('report/outcome', 'ReportController@outcome')->name('report.outcome');
+		Route::get('report/opname', 'ReportController@opname')->name('report.opname');
+	});
+	
+	Route::prefix('print')->group(function () {
+		Route::get('print/income', 'PrintController@income')->name('print.income');
+		Route::get('print/outcome', 'PrintController@outcome')->name('print.outcome');
+		Route::get('print/opname', 'PrintController@opname')->name('print.opname');
 	});
 });

@@ -31,7 +31,7 @@
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 		  <ul class="nav navbar-nav">
-			<li class="active"><a href="#">Home</a></li>
+			<li><a href="{{ route('dashboard') }}">Home</a></li>
 			<li><a href="{{ route('register.index') }}"><i class="fa fa-user"></i> Pendaftaran Pasien</a></li>
 			<li><a href="{{ route('exam.index') }}"><i class="fa fa-stethoscope"></i> Pemeriksaan</a></li> 
 			<li class="dropdown">
@@ -56,9 +56,9 @@
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-file"></i> Laporan
 				<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-				  <li><a href="#">Laporan Pendapatan</a></li>
-				  <li><a href="#">Laporan Pengeluaran</a></li>
-				  <li><a href="#">Laporan Stok Obat</a></li>
+				  <li><a href="{{ route('report.income') }}">Laporan Pendapatan</a></li>
+				  <li><a href="{{ route('report.outcome') }}">Laporan Pengeluaran</a></li>
+				  <li><a href="{{ route('report.opname') }}">Laporan Stok Obat</a></li>
 				</ul>
 			</li>
 			<li class="dropdown">
@@ -82,6 +82,7 @@
   <script src="{{ asset('assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
   <script src="{{ asset('assets/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
   <script src="{{ asset('assets/select2/dist/js/select2.min.js') }}"></script>
+  <script src="{{ asset('assets/highcharts/highcharts.js') }}"></script>
   <script>
 	  $(".datepicker").datepicker({
 	  	format: 'yyyy-mm-dd',

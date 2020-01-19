@@ -101,10 +101,10 @@ class PurchaseController extends Controller
 
     }
     public function destroy($id){
-        $sellitems = PurchaseItem::where("sale_id", $id)->get();
+        $sellitems = PurchaseItem::where("purchase_id", $id)->get();
         foreach($sellitems as $lisitem){
             $medicine = Medicine::find($lisitem->medicine_id);
-            $medicine->stock = $medicine->stock + $lisitem->amount ;
+            $medicine->stock = $medicine->stock - $lisitem->amount ;
             $medicine->update();
 
             $lisitem->delete();
